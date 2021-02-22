@@ -4,7 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 namespace HackerRank
 {
     class Program
@@ -265,6 +272,167 @@ namespace HackerRank
             return res.ToString();
         }
         
+        static int migratoryBirds(List<int> arr) {
+            var dict = new Dictionary<int, int>() { {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}};
+            if (arr.Count >= 5 && arr.Count <= 200000) {
+                foreach(var item in arr) {
+                    dict[item]++;
+                }
+            }
+            int max = dict.Values.Max();      
+            var res = dict.FirstOrDefault(x => x.Value == max).Key;  
+            foreach(var item in dict) {
+                Console.WriteLine("key={0} / value={1}", item.Key, item.Value);    
+            }
+            Console.WriteLine("Max={0} / res={1}", max, res);
+            return res;
+        }
+        
+        static string dayOfProgrammer(int year) {
+            string res = "";
+            
+            if (year >= 1700 && year <= 2700) {
+                                
+                if (year == 1918) {
+                    res = "26.09.";
+                }
+                else if (year < 1918)
+                {
+                    if (year % 4 == 0) {
+                        res = "12.09.";
+                    }
+                    else {
+                        res = "13.09.";
+                    }
+                }
+                else if (year > 1918) {
+                     if (((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+                        res = "12.09.";
+                    else
+                        res = "13.09.";
+                } 
+                res += year.ToString();
+                
+            }
+            return res;
+        }
+
+        
+        static List<int> freqQuery(List<List<int>> queries) {
+            var res = new List<int>();
+            var temp = new Dictionary<int, int>();
+            
+            foreach (var item in queries) {
+                //Console.WriteLine("[0]:{0}, [1]:{1}, temp.Count:{2}", item[0], item[1], temp.Count);
+                switch (item[0]) {
+                    case 1: {
+                        if (!temp.Keys.Contains(item[1]))
+                            temp.Add(item[1], 1);
+                        else
+                            temp[item[1]]++;
+                        break;
+                    }
+                    case 2: {
+                        if (item[1] >= 0 && item[1] < temp.Count && temp.Keys.Contains(item[1]))
+                            temp[item[1]]--;
+                        break;
+                    }
+                    case 3: {                    
+                        if (temp.Values.Contains(item[1])) {
+                            res.Add(1);
+                        }
+                        else {
+                            res.Add(0);
+                        }
+                        break;
+                    }
+                }
+            }
+            return res;
+        }
+
+        public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        var shortcut = new Dictionary<int, int>();
+        var ranked1 = ranked.Distinct().ToList();
+        var res = new List<int>();
+        
+        Console.WriteLine("count: {0}", ranked1.Count);
+        
+        if (ranked.Count > 0 && ranked.Count <= 200000 && player.Count > 0 && player.Count <= 200000 && ranked1.Count > 0) {
+            
+            for (int k=0; k < player.Count; k++) {     
+                var path = new Stack<int>();  
+                bool search=true;     
+                int l = 0, r = ranked1.Count()-1;         
+                int i = l + (r - l)/2;
+                                                     
+                if (player[k] >= ranked1[0])
+                    i = 0;
+                else if (player[k] <= ranked1.Last())
+                    i = ranked1.Count - 1;
+                                                      
+                if (shortcut.ContainsKey(player[k]))
+                    res.Add(shortcut[player[k]]);
+                else {                       
+                    while (search)
+                    {   
+                        //Console.WriteLine("player: {0}, ranked1:{1}, i={2}", player[k], ranked1[i], i);
+                        
+                        if (!path.Contains(i) && i < ranked1.Count && i >= 0) {
+                            path.Push(i);
+                                                        
+                            if (i == 0 || i == ranked1.Count() - 1) {
+                                search=false;                            
+                            } 
+                            else {
+                                if (player[k] == ranked1[i]) {
+                                    search=false;                    
+                                }
+                                else {
+                                    if (player[k] > ranked1[i]) {  
+                                        r = i - 1;
+                                    }
+                                    else if (player[k] < ranked1[i]) {
+                                        l = i + 1;  
+                                    }    
+                                    i = l + (r - l)/2;    
+                                    if (i==0) i=1;
+                                    else if (i == ranked1.Count() - 1)  i = ranked1.Count() - 2;                           
+                                }
+                                
+                            }
+                        }
+                        else {
+                            search = false;   
+                        }                    
+                    }
+                
+                    if (!search) {
+                        int n = path.First();        
+                        //Console.WriteLine("n={0}", n);                 
+                        if (player[k] < ranked1[n]) {                    
+                            res.Add(n + 2);
+                        }    
+                        else if (player[k] >= ranked1[n]) {
+                            res.Add(n + 1);
+                        }
+                    }
+                
+                    if (!shortcut.ContainsKey(player[k]))
+                        shortcut.Add(player[k], res.Last());
+                      
+                }
+                //Console.WriteLine("{0}", res.Last());
+                //Console.WriteLine("player: {0}, ranked1:{1}, i={2}", player[k], ranked1[i], i);
+                                
+            }
+        }
+        //Console.WriteLine("res: {0}, res={1}", string.Join(" ", res), res.Count);
+        return res;
+
+    }
+
         #endregion
         
         static void Main(string[] args)
@@ -294,9 +462,43 @@ namespace HackerRank
             int k = 62;
             Console.WriteLine("{0}", caesarCipher(str, k));
             */
-            #endregion
-
             
+            /*
+            System.IO.StreamReader file = new System.IO.StreamReader(@"files\migratoryBirds.txt");  
+            string n = file.ReadLine();
+            string str = file.ReadLine();
+            List<int> arr = str.Split(' ').Select(int.Parse).ToList();
+            Console.WriteLine("res = {0}", migratoryBirds(arr));
+            */
+
+            /*
+            int year = 2016;
+            Console.WriteLine("date: {0}", dayOfProgrammer(year));
+            */
+
+            /*
+            System.IO.StreamReader file = new System.IO.StreamReader(@"files\FrequencyQueries.txt");  
+            
+            List<List<int>> queries = new List<List<int>>();
+            var q = file.ReadLine().ToString();
+            Console.WriteLine("q={0}", q);
+
+            string line = "";
+
+            while ((line = file.ReadLine()) != null) {
+                queries.Add(line.TrimEnd().Split(' ').ToList().Select(queriesTemp => Convert.ToInt32(queriesTemp)).ToList());
+            }
+
+            List<int> ans = freqQuery(queries);
+            Console.WriteLine("{0}", string.Join("", ans));
+            Console.WriteLine("Count: {0}, Count(1):{1}", ans.Count, ans.Count(x => x == 1)); // 33246, 4918 (!)
+            */
+
+            #endregion
+            
+            // Write here new code:
+            
+           
         }
     }
 }

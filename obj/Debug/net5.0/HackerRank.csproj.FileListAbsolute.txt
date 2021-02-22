@@ -30,6 +30,13 @@ C:\ABorjas\Documents\HackerRank\obj\Debug\net5.0\HackerRank.dll
 C:\ABorjas\Documents\HackerRank\obj\Debug\net5.0\ref\HackerRank.dll
 C:\ABorjas\Documents\HackerRank\obj\Debug\net5.0\HackerRank.pdb
 C:\ABorjas\Documents\HackerRank\obj\Debug\net5.0\HackerRank.genruntimeconfig.cache
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.exe
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.deps.json
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.runtimeconfig.json
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.runtimeconfig.dev.json
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.dll
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\ref\HackerRank.dll
+C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.pdb
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.csprojAssemblyReference.cache
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.GeneratedMSBuildEditorConfig.editorconfig
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.AssemblyInfoInputs.cache
@@ -38,11 +45,4 @@ C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.csproj.CoreCompil
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.dll
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\ref\HackerRank.dll
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.pdb
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.exe
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.deps.json
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.runtimeconfig.json
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.runtimeconfig.dev.json
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.dll
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\ref\HackerRank.dll
-C:\ABorjas\Documents\HackerRank-C#\bin\Debug\net5.0\HackerRank.pdb
 C:\ABorjas\Documents\HackerRank-C#\obj\Debug\net5.0\HackerRank.genruntimeconfig.cache
